@@ -1,0 +1,15 @@
+{
+  "short_name": "FT CWB",
+  "name": "Food Truck CWB",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#e51420",
+  "background_color": "#e51420"
+}

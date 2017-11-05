@@ -1,0 +1,10 @@
+<% include elements/header %>
+
+    <div class="container">
+    <h2>restaurantes</h2>
+    <p><a href="/food-trucks/novo">Novo Food Truck</a></p>
+    <% foodtrucks.forEach(f => { %>
+      <p><%= f.nome %><a href="/food-trucks/editar/<%= f._id %>">Editar</a> <a href="/food-trucks/delete/<%= f._id %>">Excluir</a></p>
+    <% }) %>  
+    </div>
+<% include elements/footer %>

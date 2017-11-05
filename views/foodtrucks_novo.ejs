@@ -1,0 +1,62 @@
+<% include elements/header %>
+
+    <div class="container">
+    <h2>Incluir Food Truck</h2>
+    <p><a href="/food-trucks">Listar Food Truck</a></p>
+    <form method="post">
+        <div>
+        <h3>Informações Gerais:</h3>
+        Food Truck: <input ref='truck' type="text" name="nome" id="nome" placeholder="Nome do truck"></input>
+        Logo: <ImageUpload ref='logo'/>
+        Breve Descrição: <textarea ref='descricao' name="descricao" type="text" className="formnome"></textarea>
+        Categoria:
+        <select ref='categoria'>
+        {this.state.categorias
+        .map( key => <option key={key} value={key}>{key}</option>)}
+        </select>
+        </div>
+        <div>
+        <h3>Redes Sociais:</h3>
+        Facebook: <input ref='facebook' type="text" className="formnome"></input>
+        Instagram: <input ref='instagram' type="text" className="formnome"></input>
+        Site: <input ref='site' type="text" className="formnome"></input>
+        </div>
+        <div id="map" style="height: 400px;"></div>
+        <input type="hidden" name="lat" id="lat" />
+        <input type="hidden" name="lng" id="lng" />
+        <button type="submit">Salvar</button>
+      </form>
+      </div>
+      <script>
+      function initMap(){         
+        var initialLocation = { lat: -25.428, lng: -49.273 }
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: initialLocation
+      })
+
+      var marker = new google.maps.Marker({
+        position: initialLocation,
+        map: map,
+        draggable: true    
+      })
+
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position){
+          var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+          marker.setPosition(latlng)
+          map.panTo(latlng)
+        })
+      }
+      
+      marker.addListener('dragend', function(){
+        document.getElementById('lat').value = marker.position.lat()
+        document.getElementById('lng').value = marker.position.lng()
+        console.log(marker.position.lat(), marker.position.lng())
+      })
+    }
+    </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6h1NNC2tEGekFmJZUiMxj2UWeNc9b4k8&callback=initMap">
+      </script>
+<% include elements/footer %>
